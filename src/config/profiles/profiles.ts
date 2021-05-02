@@ -1,4 +1,4 @@
-import { environment } from "..";
+import environment from "../environment";
 import { ProfilesValues } from "./profiles-values";
 
 export default class Profiles {
