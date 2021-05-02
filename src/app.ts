@@ -1,7 +1,9 @@
+import environment from "./config/environment";
+
 const express = require('express');
 
 const app = express();
 
-app.get('/', (req, res) => res.send('OK'));
+app.get('/', (_, res) => res.send('OK'));
 
-app.listen(8080, () => console.log('Server started on port 8080'));
+app.listen(environment.port, () => console.log(`Server started on port ${environment.port}`));
