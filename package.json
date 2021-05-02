@@ -5,8 +5,10 @@
     "main": "src/app.ts",
     "scripts": {
         "build": "tsc",
-        "test": "test",
-        "watch": "nodemon"
+        "watch": "nodemon",
+        "test": "set NODE_ENV=test && npm run test-jest",
+        "test-watch": "npm run test-jest -- --watch",
+        "test-jest": "jest"
     },
     "repository": {
         "type": "git",
@@ -30,11 +32,14 @@
     },
     "devDependencies": {
         "@types/express": "^4.17.11",
+        "@types/jest": "^26.0.23",
         "@types/node": "^15.0.1",
         "@typescript-eslint/eslint-plugin": "^4.22.0",
         "@typescript-eslint/parser": "^4.22.0",
         "eslint": "^7.25.0",
+        "jest": "^26.6.3",
         "nodemon": "^2.0.7",
+        "ts-jest": "^26.5.5",
         "ts-node": "^9.1.1",
         "typescript": "^4.2.4"
     }
