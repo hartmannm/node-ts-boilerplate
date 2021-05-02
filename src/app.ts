@@ -1,18 +1,23 @@
 import environment from "./config/environment";
-import HttpLoggerInstance from "./loaders/log/http-logger";
 import LoggerInstance from "./loaders/log/logger";
+import express from 'express';
 
-const express = require('express');
+async function startServer() {
+    const app = express();
+    const http = require('http');
 
-const app = express();
-app.use(HttpLoggerInstance)
-app.get('/', (_, res) => res.send('OK'));
+    await require('./loaders').default({ expressApp: app });
+    app.get('/', (_, res) => res.send('OK'));
 
-app.listen(environment.port, () => LoggerInstance.info(`
-    ################################################
-      Server listening on port: ${environment.port}
-    ################################################
-    `)).on('error', err => {
-    LoggerInstance.error(err);
-    process.exit(1);
-})
+    const server = http.createServer(app);
+    server.listen(environment.port, () => LoggerInstance.info(`
+        ################################################
+          Server listening on port: ${environment.port}
+        ################################################
+        `)).on('error', err => {
+        LoggerInstance.error(err);
+        process.exit(1);
+    });
+};
+
+startServer();

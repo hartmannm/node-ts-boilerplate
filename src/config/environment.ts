@@ -11,7 +11,6 @@ if (environment.error) {
 }
 
 const _getDefaultLogsPath = (): string => {
-    console.log(path.resolve('/logs/boilerplate'))
     return path.resolve('/logs/boilerplate');
 };
 
