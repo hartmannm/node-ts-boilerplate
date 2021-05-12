@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
         "target": "esNext",
+        "lib": ["es6", "dom"],
+        "types": ["reflect-metadata"],
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,

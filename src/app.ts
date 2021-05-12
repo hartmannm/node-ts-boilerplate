@@ -1,6 +1,7 @@
 import environment from "./config/environment";
-import LoggerInstance from "./loaders/log/logger";
 import express from 'express';
+import DiContainer from "./loaders/DiContainer";
+import { Logger } from "winston";
 
 async function startServer() {
     const app = express();
@@ -10,12 +11,15 @@ async function startServer() {
     app.get('/', (_, res) => res.send('OK'));
 
     const server = http.createServer(app);
-    server.listen(environment.port, () => LoggerInstance.info(`
+
+    const logger = DiContainer.get<Logger>('logger');
+
+    server.listen(environment.port, () => logger.info(`
         ################################################
           Server listening on port: ${environment.port}
-        ################################################
-        `)).on('error', err => {
-        LoggerInstance.error(err);
+        ################################################`)
+    ).on('error', err => {
+        logger.error(err);
         process.exit(1);
     });
 };
